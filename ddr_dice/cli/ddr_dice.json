@@ -1,0 +1,339 @@
+{
+  "version": "0.1.0",
+  "name": "ddr_dice",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        },
+        {
+          "name": "vaultBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "initializePlayerPool",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "playerPool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "playGame",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "playerPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet1",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet2",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet3",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet4",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet5",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet6",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet7",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet8",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet9",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryWallet10",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        },
+        {
+          "name": "vaultBump",
+          "type": "u8"
+        },
+        {
+          "name": "setNumber",
+          "type": "u64"
+        },
+        {
+          "name": "deposit",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claimReward",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "playerPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        },
+        {
+          "name": "vaultBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        },
+        {
+          "name": "vaultBump",
+          "type": "u8"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GlobalPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "superAdmin",
+            "type": "publicKey"
+          },
+          {
+            "name": "totalRound",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "publicKey"
+          },
+          {
+            "name": "round",
+            "type": "u64"
+          },
+          {
+            "name": "gameData",
+            "type": {
+              "defined": "GameData"
+            }
+          },
+          {
+            "name": "winTimes",
+            "type": "u64"
+          },
+          {
+            "name": "reveivedReward",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "GameData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "playTime",
+            "type": "i64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "rewardAmount",
+            "type": "u64"
+          },
+          {
+            "name": "setNum",
+            "type": "u64"
+          },
+          {
+            "name": "rand",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidPlayerPool",
+      "msg": "Invalid Player Pool Owner"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidAdmin",
+      "msg": "Invalid Admin to Withdraw"
+    },
+    {
+      "code": 6002,
+      "name": "InsufficientRewardVault",
+      "msg": "Insufficient Reward SOL Balance"
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientUserBalance",
+      "msg": "Insufficient User SOL Balance"
+    }
+  ]
+}
